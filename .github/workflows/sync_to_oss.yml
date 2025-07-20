@@ -1,7 +1,7 @@
-# 工作流的名称
+# 工作流名称
 name: Sync MD files to Aliyun OSS
 
-# 触发工作流的事件
+# 触发工作流事件
 on:
   # 1. 当有代码被 push 到 main 分支时触发
   push:
