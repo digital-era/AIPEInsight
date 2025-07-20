@@ -13,6 +13,9 @@ GITHUB_BRANCH = "main"
 OSS_ACCESS_KEY_ID = os.getenv("OSS_ACCESS_KEY_ID")
 OSS_ACCESS_KEY_SECRET = os.getenv("OSS_ACCESS_KEY_SECRET")
 
+# 从环境变量中安全地读取 GITHUB_TOKEN
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
 # 检查密钥是否存在
 if not OSS_ACCESS_KEY_ID or not OSS_ACCESS_KEY_SECRET:
     raise ValueError("错误：环境变量 OSS_ACCESS_KEY_ID 或 OSS_ACCESS_KEY_SECRET 未设置！")
