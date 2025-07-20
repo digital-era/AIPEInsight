@@ -1,4 +1,4 @@
-#@title Commit Indutryinsight to Github AIPEInsight
+#@title Commit Indutryinsight to OSS
 !pip install oss2
 
 import requests
