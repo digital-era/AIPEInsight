@@ -1,0 +1,46 @@
+# 工作流的名称
+name: Sync MD files to Aliyun OSS
+
+# 触发工作流的事件
+on:
+  # 1. 当有代码被 push 到 main 分支时触发
+  push:
+    branches:
+      - main  # 您可以根据需要修改为您的主分支名，如 master
+
+  # 2. 允许在 GitHub Actions 页面手动触发此工作流
+  workflow_dispatch:
+
+# 定义工作流要执行的任务
+jobs:
+  # 定义一个名为 'sync-files' 的任务
+  sync-files:
+    # 指定任务运行的虚拟环境
+    runs-on: ubuntu-latest
+
+    # 定义任务的执行步骤
+    steps:
+      # 第一步：检出（下载）您的仓库代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 第二步：设置 Python 环境
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # 指定 Python 版本
+
+      # 第三步：安装脚本所需的依赖库
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests oss2
+
+      # 第四步：运行同步脚本
+      - name: Run sync script to OSS
+        # 使用 env 关键字将 GitHub Secrets 注入到环境变量中
+        env:
+          OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          OSS_ACCESS_KEY_SECRET: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+        # 执行 Python 脚本
+        run: python sync_to_oss.py
