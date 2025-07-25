@@ -65,9 +65,10 @@ def get_github_files_to_sync(branch="main"):
 
                 # 应用筛选条件
                 is_markdown = file_name.endswith('.md')
-                has_keyword = "行业" in file_name or "主题" in file_name
+                #has_keyword = "行业" in file_name or "主题" in file_name                
 
-                if is_markdown and has_keyword:
+                #if is_markdown and has_keyword:
+                if is_markdown:
                     # 将文件的完整相对路径添加到列表中
                     file_list.append(file_path)
                     print(f"  [匹配成功] -> {file_path}")
